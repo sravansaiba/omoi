@@ -1,7 +1,7 @@
 import { Button } from '@material-tailwind/react'
 import { useContext } from 'react'
 import myContext from '../../context/data/myContext';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 
 Comment.propTypes = {
