@@ -31,11 +31,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       chunkSizeWarningLimit: 1000,
-      external: ['prop-types'],
     },
   },
-  optimizeDeps: {
-        include: ['prop-types'],
-      },
 });
+
 
