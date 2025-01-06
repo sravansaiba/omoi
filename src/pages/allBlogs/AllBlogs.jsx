@@ -31,7 +31,7 @@ function AllBlogs() {
                               const {title,thumbnail,content,date,id}=item
 
                             return(
-                                <div className="p-4 lg:h-[70vh] xs:h-[60vh] w-full lg:w-96 md:w-1/3 sm:w-1/2" key={idx} >
+                                <div className="p-4 max-h-[70vh] xs:h-[60vh] w-full lg:w-96 md:w-1/3 sm:w-1/2" key={idx} >
                             <div
                                 style={{
                                     background: mode === 'dark'
@@ -50,7 +50,7 @@ function AllBlogs() {
                                 rounded-xl overflow-hidden`} 
                             >
                                 {/* Blog Thumbnail  */}
-                                <img className=" w-full h-60 object-fill" src={thumbnail} alt="blog" />
+                                <img className=" w-full h-52 object-fill" src={thumbnail} alt="blog" />
 
                                 {/* Top Items  */}
                                 <div className="p-6">
@@ -73,7 +73,7 @@ function AllBlogs() {
                                     </h1>
 
                                     {/* Blog Description  */}
-                                    <p className="leading-relaxed mb-3 truncate" style={{
+                                    <p className="leading-relaxed text-sm flex-grow  mb-5 truncate" style={{
                                         color: mode === 'dark'
                                             ? 'rgb(226, 232, 240)'
                                             : ' rgb(30, 41, 59)'
@@ -81,7 +81,10 @@ function AllBlogs() {
                                        
                                     </p>
 
-                                    <button onClick={()=>navigate(`/bloginfo/${id}`)} className='text-white bg-black p-2 w-full hover:bg-white hover:text-black mt-2 text-center border-2 rounded-lg border-black'>read more</button>
+                                    {/* <button onClick={()=>navigate(`/bloginfo/${id}`)} className='text-white bg-black p-2 w-full hover:bg-white hover:text-black mt-2 text-center border-2 rounded-lg border-black'>read more</button> */}
+                                    <div className='p-1'>
+                                    <button onClick={()=>navigate(`/bloginfo/${id}`)} className='text-white bg-black p-2 w-full hover:bg-white hover:text-black  text-center border-2 rounded-lg border-black'>read more</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

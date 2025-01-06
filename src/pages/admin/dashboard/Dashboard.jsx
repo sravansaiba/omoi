@@ -17,7 +17,7 @@ function Dashboard() {
     setLoading(false)
     },1000)
   })
-
+console.log(getAllBlog)
 
   const logout = async () => {
     try {

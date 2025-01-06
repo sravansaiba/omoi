@@ -13,6 +13,9 @@ import { Client, Databases, Storage } from "appwrite";
 import { v4 as uuidv4 } from "uuid";
 import toast from 'react-hot-toast';
 
+
+
+
 // Initialize Appwrite Client
 const client = new Client();
 client
@@ -26,6 +29,15 @@ const CreateBlog = () => {
     const context = useContext(myContext);
     const { mode } = context;
     const navigate = useNavigate();
+
+    // Constants for Appwrite
+    const STORAGE_BUCKET_ID = import.meta.env.VITE_STORAGE_BUCKET_ID;
+    const DATABASE_ID = import.meta.env.VITE_DATABASE_ID;
+    const BlogCOLLECTION_ID = import.meta.env.VITE_BLOG_COLLECTION_ID;
+
+    const Editior_Key = import.meta.env.VITE_EDITIOR_KEY;
+
+    // console.log(DATABASE_ID)
 
     const [blogs, setBlogs] = useState({
         title: "",
@@ -45,21 +57,19 @@ const CreateBlog = () => {
     const uploadImage = () => {
         if (!thumbnail) return;
 
-        const bucketId = "673cc3df001232dd25b8"; // Replace with your bucket ID
-        const databaseId = "673cc4bb001a61a37f34"; // Replace with your database ID
-        const collectionId = "673cc66000304f95b12b"; // Replace with your collection ID
+        
         const fileId = uuidv4(); // Generate a unique ID for the file
 
         // Step 1: Upload the image to Appwrite storage
-        storage.createFile(bucketId, fileId, thumbnail)
+        storage.createFile(STORAGE_BUCKET_ID, fileId, thumbnail)
             .then((uploadedFile) => {
                 // Step 2: Get the public URL for the uploaded file
-                const fileUrl = storage.getFileView(bucketId, uploadedFile.$id);
+                const fileUrl = storage.getFileView(STORAGE_BUCKET_ID, uploadedFile.$id);
 
                 // Step 3: Add the blog post to the Appwrite database
                 return databases.createDocument(
-                    databaseId,
-                    collectionId,
+                    DATABASE_ID,
+                    BlogCOLLECTION_ID,
                     uuidv4(), // Unique ID for the blog post
                     {
                         title:blogs.title,
@@ -182,7 +192,7 @@ const CreateBlog = () => {
 
                 {/* Editor */}
                 <Editor
-                    apiKey='ulnkdfjum0y000xlqt6jlj6adxjaefgl2ihs28n6sikn3cnx'
+                    apiKey={Editior_Key}
                     onEditorChange={(newValue, editor) => {
                         setBlogs({ ...blogs, content: newValue });
                     }}

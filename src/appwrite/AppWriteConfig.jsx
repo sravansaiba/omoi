@@ -1,5 +1,13 @@
 import { Client, Account, Databases, Storage } from "appwrite";
 
+
+
+const BlogCOLLECTION_ID = import.meta.env.VITE_BLOG_COLLECTION_ID;
+
+
+
+
+
 // Initialize the Appwrite client
 const client = new Client();
 client
@@ -10,6 +18,6 @@ client
 const account = new Account(client);
 const databases =new Databases(client);
 const storage =new Storage(client);
-const blogCollection = '673cc66000304f95b12b';
+const blogCollection = BlogCOLLECTION_ID;
 
 export { client, account,databases,storage,blogCollection };

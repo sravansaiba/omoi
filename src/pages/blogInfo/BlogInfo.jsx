@@ -10,6 +10,13 @@ import { databases } from '../../appwrite/AppWriteConfig';
 import { BiCategory } from 'react-icons/bi';
 
 function BlogInfo() {
+   
+  
+  const DATABASE_ID = import.meta.env.VITE_DATABASE_ID;
+  const CommentCOLLECTION_ID = import.meta.env.VITE_COMMENT_ID;
+  
+
+
   const context = useContext(myContext);
   const { mode, loading, getAllBlog } = context;
   const { id } = useParams(); // Get the blog ID from URL params
@@ -20,13 +27,12 @@ function BlogInfo() {
   const [allComment, setAllComment] = useState([]);
 
   const addComment = async () => {
-    const databaseId = '673cc4bb001a61a37f34'; // Replace with your database ID
-    const collectionId = '673eb4df0034cc88add2'; // Replace with your collection ID
+    
 
     try {
       await databases.createDocument(
-        databaseId,
-        collectionId,
+        DATABASE_ID,
+        CommentCOLLECTION_ID,
         ID.unique(), // Generate a unique ID for the comment
         {
           fullName,
@@ -52,13 +58,11 @@ function BlogInfo() {
   };
 
   const getcomment = async () => {
-    const databaseId = '673cc4bb001a61a37f34';
-    const collectionId = '673eb4df0034cc88add2';
-
+  
     try {
       const response = await databases.listDocuments(
-        databaseId,
-        collectionId,
+        DATABASE_ID,
+        CommentCOLLECTION_ID,
         [
           Query.equal('blogId', id), // Filter comments by blog ID
           Query.orderDesc('time'), // Order by time (descending)

@@ -6,6 +6,15 @@ import toast from 'react-hot-toast';
 
 
 function MyState(props) {
+
+  
+  //  Constants for Appwrite
+   const STORAGE_BUCKET_ID = import.meta.env.VITE_STORAGE_BUCKET_ID;
+   const DATABASE_ID = import.meta.env.VITE_DATABASE_ID;
+   const BlogCOLLECTION_ID = import.meta.env.VITE_BLOG_COLLECTION_ID;
+
+   const Editior_Key = import.meta.env.VITE_EDITIOR_KEY;
+
     const [mode, setMode] = useState('light'); // Whether dark mode is enabled or not
     const toggleMode = () => {
         if (mode === 'light') {
@@ -24,11 +33,14 @@ function MyState(props) {
 
 
     function getAllBlogs() {
+    
+      
+      
         setLoading(true);
         try {
           const promise = databases.listDocuments(
-            "673cc4bb001a61a37f34", // Replace with your database ID
-            "673cc66000304f95b12b", // Replace with your collection ID
+            DATABASE_ID, // Replace with your database ID
+            BlogCOLLECTION_ID, // Replace with your collection ID
             [Query.orderAsc("time")] // Sorting by 'time' field in ascending order
           );
       
@@ -62,11 +74,10 @@ function MyState(props) {
 
 
 const deleteBlogs = async (id) => {
-  const databaseId = '673cc4bb001a61a37f34'; // Replace with your Appwrite database ID
-  const collectionId = '673cc66000304f95b12b'; // Replace with your Appwrite collection ID
+
 
   try {
-      await databases.deleteDocument(databaseId, collectionId, id); // Delete the document using its ID
+      await databases.deleteDocument(DATABASE_ID, BlogCOLLECTION_ID, id); // Delete the document using its ID
       await getAllBlogs(); // Refresh the blog list
       toast.success("Blog deleted successfully");
   } catch (error) {
