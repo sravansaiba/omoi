@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import myContext from '../../context/data/myContext';
 import PropTypes from 'prop-types'
 
+
 Comment.propTypes = {
   addComment: PropTypes.func.isRequired, // Ensure addComment is validated as a function
   commentText: PropTypes.string.isRequired,
